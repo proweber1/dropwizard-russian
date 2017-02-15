@@ -81,3 +81,18 @@ JSON'а на виртуальной машине Java. В добавлении �
 - [Joda Time](http://joda-time.sourceforge.net/) библиотека с большими возможностями для работы с датой и временем в Java.
 
 ## Установка с помощью maven
+
+Мы рекомендуем использовать [Maven](http://maven.apache.org/), если вы используете 
+[Ant](http://ant.apache.org/)/[Ivy](http://ant.apache.org/ivy/), [Buildr](http://buildr.apache.org/),
+[Gradle](http://www.gradle.org/), [SBT](https://github.com/harrah/xsbt/wiki), [Leiningen](https://github.com/technomancy/leiningen)
+или [Gant](https://github.com/Gant/Gant), да, это круто. Но теперь будете использовать maven :)
+
+У вас есть три варианта развертки первого проекта
+
+- Создать проект используя [dropwizard-archetype](https://github.com/dropwizard/dropwizard/tree/master/dropwizard-archetypes)
+```bash
+mvn archetype:generate -DarchetypeGroupId=io.dropwizard.archetypes -DarchetypeArtifactId=java-simple -DarchetypeVersion=0.9.1
+```
+- Посмотреть и склонировать [dropwizard-example](https://github.com/dropwizard/dropwizard/tree/master/dropwizard-example)
+- Пройти следующий туториал который описан далее
+
