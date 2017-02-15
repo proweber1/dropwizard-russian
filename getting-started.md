@@ -96,3 +96,12 @@ mvn archetype:generate -DarchetypeGroupId=io.dropwizard.archetypes -DarchetypeAr
 - Посмотреть и склонировать [dropwizard-example](https://github.com/dropwizard/dropwizard/tree/master/dropwizard-example)
 - Пройти следующий туториал который описан далее
 
+#### Установка DropWizard с помощью Maven
+
+Сначала добавьте `dropwizard.version` в ваш `POM.xml` (сейчас актуальная версия 1.0.6)
+
+```xml
+<properties>
+    <dropwizard.version>1.0.6</dropwizard.version>
+</properties>
+```
