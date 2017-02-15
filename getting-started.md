@@ -125,4 +125,46 @@ mvn archetype:generate -DarchetypeGroupId=io.dropwizard.archetypes -DarchetypeAr
 
 Каждое DropWizard приложение должно иметь конфигурационный класс который является суб классом от
 `Configuration` класса, который хранит специфические параметры вашего приложения. Эти параметры описываются
- в YAML конфигурационном файле который десериализуется в инстанс объекта вашего конфигурационного файла и валидируется.
+в YAML конфигурационном файле который десериализуется в инстанс объекта вашего конфигурационного файла и валидируется.
+ 
+Приложение которое мы будем строить это высокопроизводительный сервис HelloWorld и одним из наших требований
+является то, что нам нужно иметь возможность указать имя по-умолчанию и формат сообщений которые мы будем отдавать
+клиенту.
+
+Вот пример класса конфигурации, полный пример [здесь](https://github.com/dropwizard/dropwizard/blob/master/dropwizard-example/src/main/java/com/example/helloworld/HelloWorldConfiguration.java)
+
+```java
+package com.example.helloworld;
+
+import io.dropwizard.Configuration;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.validator.constraints.NotEmpty;
+
+public class HelloWorldConfiguration extends Configuration {
+    @NotEmpty
+    private String template;
+
+    @NotEmpty
+    private String defaultName = "Stranger";
+
+    @JsonProperty
+    public String getTemplate() {
+        return template;
+    }
+
+    @JsonProperty
+    public void setTemplate(String template) {
+        this.template = template;
+    }
+
+    @JsonProperty
+    public String getDefaultName() {
+        return defaultName;
+    }
+
+    @JsonProperty
+    public void setDefaultName(String name) {
+        this.defaultName = name;
+    }
+}
+```
