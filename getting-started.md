@@ -243,6 +243,6 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
 }
 ```
 
-> **Замечание от переводчика**
+> **Замечание от переводчика**: 
 > Из обязательных методов здесь является только метод run(), остальные переопределяются
 > по желанию.
