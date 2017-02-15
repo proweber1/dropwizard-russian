@@ -203,3 +203,46 @@ DropWizard имеет множество параметров конфигура
 этим файлом довольно быстро. Далее мы создадим класс приложения.
 
 ## Создание класса приложения
+
+Ваше DropWizard приложение состоит минимум из двух классов. Это класс конфигурации который
+расширяет `Configuration` класс и класс приложения который расширяет класс `Application<T extends Configuration>`.
+
+Класс приложения обеспечивает связку всех компонентов вашего приложения (но об этом позже) наш `HelloWorldApplication`
+класс будет выглядеть следующим образом.
+
+```java
+package com.example.helloworld;
+
+import io.dropwizard.Application;
+import io.dropwizard.setup.Bootstrap;
+import io.dropwizard.setup.Environment;
+import com.example.helloworld.resources.HelloWorldResource;
+import com.example.helloworld.health.TemplateHealthCheck;
+
+public class HelloWorldApplication extends Application<HelloWorldConfiguration> {
+    public static void main(String[] args) throws Exception {
+        new HelloWorldApplication().run(args);
+    }
+
+    @Override
+    public String getName() {
+        return "hello-world";
+    }
+
+    @Override
+    public void initialize(Bootstrap<HelloWorldConfiguration> bootstrap) {
+        // nothing to do yet
+    }
+
+    @Override
+    public void run(HelloWorldConfiguration configuration,
+                    Environment environment) {
+        // nothing to do yet
+    }
+
+}
+```
+
+> **Замечание от переводчика**
+> Из обязательных методов здесь является только метод run(), остальные переопределяются
+> по желанию.
