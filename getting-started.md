@@ -98,7 +98,7 @@ mvn archetype:generate -DarchetypeGroupId=io.dropwizard.archetypes -DarchetypeAr
 
 #### Установка DropWizard с помощью Maven
 
-Сначала добавьте `dropwizard.version` в ваш `POM.xml` (сейчас актуальная версия 1.0.6)
+Сначала добавьте `dropwizard.version` в ваш `pom.xml` (сейчас актуальная версия 1.0.6)
 
 ```xml
 <properties>
@@ -117,3 +117,8 @@ mvn archetype:generate -DarchetypeGroupId=io.dropwizard.archetypes -DarchetypeAr
     </dependency>
 </dependencies>
 ```
+
+Этого достаточно чтобы установить `dropwizard`. Теперь давайте приступим
+к написанию реального кода.
+
+## Создание конфигурационного файла
