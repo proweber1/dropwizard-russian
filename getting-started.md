@@ -105,3 +105,15 @@ mvn archetype:generate -DarchetypeGroupId=io.dropwizard.archetypes -DarchetypeAr
     <dropwizard.version>1.0.6</dropwizard.version>
 </properties>
 ```
+
+А теперь добавьте `dropwizard-core` как зависимость вашего проекта
+
+```xml
+<dependencies>
+    <dependency>
+        <groupId>io.dropwizard</groupId>
+        <artifactId>dropwizard-core</artifactId>
+        <version>${dropwizard.version}</version>
+    </dependency>
+</dependencies>
+```
