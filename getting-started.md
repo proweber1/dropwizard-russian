@@ -320,3 +320,60 @@ public class Saying {
 Теперь когда у нас есть класс представления, то теперь пора сделать класс ресурса для этого класса.
 
 ## Создание класса ресурса
+
+Jersey ресурсы являются центром DropWizard приложения. Каждый класс ресурса
+ассоциируется с определенным URI шаблоном. В нашем приложении нам нужен ресурс
+который возвращает экземпляр класса `Saying` по url `/hello-world` так будет выглядеть
+наш resource класс.
+
+```java
+package com.example.helloworld.resources;
+
+import com.example.helloworld.api.Saying;
+import com.codahale.metrics.annotation.Timed;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.Optional;
+
+@Path("/hello-world")
+@Produces(MediaType.APPLICATION_JSON)
+public class HelloWorldResource {
+    private final String template;
+    private final String defaultName;
+    private final AtomicLong counter;
+
+    public HelloWorldResource(String template, String defaultName) {
+        this.template = template;
+        this.defaultName = defaultName;
+        this.counter = new AtomicLong();
+    }
+
+    @GET
+    @Timed
+    public Saying sayHello(@QueryParam("name") Optional<String> name) {
+        final String value = String.format(template, name.orElse(defaultName));
+        return new Saying(counter.incrementAndGet(), value);
+    }
+}
+```
+
+`HelloWorldResource` имеет две анотации. `@Path` и `@Produces`.
+`@Path("/hello-world")` сообщает Jersey что этот ресурс должен быть
+доступен по URI `/hello-world` и `@Produces(MediaType.APPLICATION_JSON)`
+сообщает Jersey что наш ресурс отдает ответ в виде JSON документов.
+
+`HelloWorldResource` получает два параметра в конструктор: `template` этот шаблон
+используется для конструирования фразы и `defaultName` используется когда
+пользователь отказывается сообщать нам свое имя. А
+`AtomicLong` дает нам дешевый потокобезопасный способ получать уникальные
+id для наших записей.
+
+> **Предупреждение**:
+> Классы ресурсов исполняются в многопоточной среде. В общем мы рекомендуем
+> делать классы ресурсов без состояния или иммутабельными. Но очень важно сохранять
+> контекст
